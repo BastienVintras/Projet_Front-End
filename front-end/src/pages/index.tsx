@@ -1,4 +1,5 @@
 import {Seo} from "@/ui/components/seo"
+import { Typography } from "@/ui/design-system/typography/typography";
 
 
 export default function Home() {
@@ -6,7 +7,7 @@ export default function Home() {
    
    <>
        <Seo title= "Coders Monkeys" description="description.."/>
-       <h1>Hello World</h1>
+        <Typography component="p">Hello World</Typography>
    </>
     
   );

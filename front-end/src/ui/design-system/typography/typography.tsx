@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 interface Props {
   variant?: //propiete optionnelle
   | "display"
@@ -16,7 +18,7 @@ interface Props {
     | "caption4";
 
   component?: "h1" | "h2" | "h3" | "h4" | "h5" | "div" | "p" | "span";
-  theme?: "black" | "white" | "grey" | "primary" | "secondary";
+  theme?: "black" | "white" | "gray" | "primary" | "secondary";
   weight?: "regular" | "medium";
   className?: string;
 
@@ -27,7 +29,7 @@ interface Props {
 }
 // Cette partie définit une interface TypeScript appelée Props.
 // Dans le contexte de React, les composants fonctionnels peuvent accepter des propriétés (props) en tant que paramètres.
-//le variant est definit en "h3" par defaut si il n 'est pas renseigné, pareil pour le component en "div"
+//le variant est definit en "h3" par defaut si il n 'est pas renseigné, pareil pour le component en "div",theme et weight
 export const Typography = ({
   variant = "h3",
   component: Component = "div",
@@ -36,23 +38,92 @@ export const Typography = ({
   className,
   children,
 }: Props) => {
-  let variantstyles: string = "";
+  let variantStyles: string = "",
+    colorStyles: string = "";
 
   switch (variant) {
     case "display":
-      variantstyles = "";
+      variantStyles = "text-8xl";
       break;
     case "h1":
-      variantstyles = "";
-    default:
+      variantStyles = "text-7xl";
+      break;
+    case "h2":
+      variantStyles = "text-6xl";
+      break;
+    case "h3": //Default
+      variantStyles = "text-5xl";
+      break;
+    case "h4":
+      variantStyles = "text-4xl";
+      break;
+    case "h5":
+      variantStyles = "text-3xl";
+      break;
+    case "lead":
+      variantStyles = "text-2xl";
+      break;
+    case "body-lg":
+      variantStyles = "text-lg";
+      break;
+    case "body-base":
+      variantStyles = "text-base";
+      break;
+    case "body-sm":
+      variantStyles = "text-sm";
+      break;
+    case "caption1":
+      variantStyles = "text-caption1";
+      break;
+    case "caption2":
+      variantStyles = "text-caption2";
+      break;
+    case "caption3":
+      variantStyles = "text-caption3";
+      break;
+    case "caption4":
+      variantStyles = "text-caption4";
       break;
   }
 
+  switch (theme) {
+    case "black"://default
+      colorStyles = "txt-gray";
+
+      break;
+    case "gray":
+      colorStyles = "text-gray-700";
+
+      break;
+    case "white":
+      colorStyles = "text-white";
+
+      break;
+    case "primary":
+      colorStyles = "text-primary";
+
+      break;
+    case "secondary":
+      colorStyles = "text-secondary";
+
+      break;
+
+    default:
+      break;
+  }
   // "clsx" = bibliotheque pour gérer de manière élégante et efficace les classes CSS conditionnelles.
   //  Elle permet de construire dynamiquement une chaîne de classes CSS en fonction de conditions.
   return (
     //Composant fonctionnel
-    <Component className="{clsx(variantStyles,className)}">
+    <Component
+      className={clsx(
+      variantStyles,
+      colorStyles,
+      weight==="medium" &&"font-medium",
+      className,
+      
+      )}
+    >
       {children}
     </Component>
   );

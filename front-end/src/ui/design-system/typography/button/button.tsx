@@ -1,9 +1,10 @@
+import { IconProps } from "@/types/iconProps";
 import clsx from "clsx";
 
 interface Props {
   size?: "small" | "medium" | "large";
   variant?: "accent" | "secondary" | "outline" | "disabled" | "ico";
-  icon?: any;
+  icon?:IconProps;
   iconTheme?: "accent" | "secondary" | "gray";
   iconPosition?: "left" | "right";
   disabled?: boolean;
@@ -20,44 +21,62 @@ export const Button = ({
   isLoading,
   children,
 }: Props) => {
-  let varianStyles: string = "",
+  let variantStyles: string = "",
     sizeStyles: string = "",
     icoSize: number = 0;
 
   switch (variant) {
     case "accent": //Default
-      varianStyles = "bg-primary hover:primary-400 text-white rounded";
+      variantStyles = "bg-primary hover:primary-400 text-white rounded";
 
       break;
     case "secondary":
-      varianStyles = "bg-primary-200 hover:primary-300/50 text-primary rounded"; //le /50 est la valeur de l opacité
+      variantStyles = "bg-primary-200 hover:primary-300/50 text-primary rounded"; //le /50 est la valeur de l opacité
 
       break;
     case "outline":
-      varianStyles = "bg-white hover:bg-gray-400/50 border border-gray-500 text-gray-900 rounded";
+      variantStyles = "bg-white hover:bg-gray-400/50 border border-gray-500 text-gray-900 rounded";
 
       break;
     case "disabled":
-      varianStyles = "bg-gray-400 border border-gray-500 text-gray-600 rounded cursor-not-allowed";
+      variantStyles = "bg-gray-400 border border-gray-500 text-gray-600 rounded cursor-not-allowed";
 
       break;
     case "ico":
-      varianStyles = "";
+     if (iconTheme === "accent"){
+variantStyles= 
+"bg-primary hover:bg-primary-400 text-white rounded-full";
+     }
+     if (iconTheme === "secondary"){
+      variantStyles= 
+      "bg-primary-200 hover:primary-300/50 text-primary rounded-full"
+    }
+    if (iconTheme === "secondary"){
+      variantStyles= 
+      "bg-gray-700 hover:bg-gray-600 text-white rounded-full"
+    }
 
       break;
   }
 
   switch (size) {
     case "small":"";
-      sizeStyles = "text-caption3 font-medium px-[14px] py-[12px]";
+      sizeStyles = `text-caption3 font-medium ${
+        variant ==="ico"?"flex items-center justify-center w-[40px] h-[40px]":"px-[14px] py-[12px]"
+      }`;
+      icoSize = 18
       break;
 
     case "medium":"";//Default
-      sizeStyles = "text-caption2 font-medium px-[18px] py-[15px]";
+      sizeStyles = `text-caption2 font-medium ${
+        variant ==="ico"?"flex items-center justify-center w-[50px] h-[50px]": "px-[18px] py-[15px]"}`;
+      icoSize = 20
       break;
 
     case "large":"";
-      sizeStyles = "text-caption1 font-medium px-[22px] py-[18px]";
+      sizeStyles = `text-caption1 font-medium ${
+        variant ==="ico"?"flex items-center justify-center w-[60px] h-[60px]":"px-[22px] py-[18px]"}`;
+      icoSize = 24
       break;
   }
 
@@ -65,11 +84,22 @@ export const Button = ({
     <>
       <button
         type="button"
-        className={clsx(varianStyles,sizeStyles,icoSize,"")}
+        className={clsx(variantStyles,sizeStyles,icoSize)}
         onClick={() => console.log("click")}
         disabled={disabled}
       >
+        {/* Si c est une icone on affiche l icon dans un noeud "<> </>" sinon on affiche children */}
+        {icon && variant ==="ico" ? (
+        <icon.icon size={icoSize}/> 
+        ):
+        // Si l icone existe la condition rentre dans cette classe la
+         <div className= {clsx(icon && "flex items-center gap-1")}> 
+        {icon && iconPosition ==="left"&&(<icon.icon size ={icoSize}/> )} {/*condition ternaire*/}
+        
         {children}
+        {icon && iconPosition ==="right"&&(<icon.icon size ={icoSize}/> )}
+        </div> } 
+      
       </button>
     </>
   );

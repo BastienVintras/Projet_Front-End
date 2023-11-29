@@ -1,31 +1,6 @@
-interface Props {
-  size?: "very-small" | "small" | "medium" | "large";
-}
-
-export const Logo = ({ size = "medium" }: Props) => {
-  let sizeLogo: number;
-
-  switch (size) {
-    case "very-small":
-      sizeLogo = 34;
-      break;
-
-    case "small":
-      sizeLogo = 61;
-      break;
-
-    case "medium"://Default
-      sizeLogo = 88;
-      break;
-
-    case "large":
-      sizeLogo = 140;
-      break;
-  }
-  return <div> 
-    
-
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" width={sizeLogo} viewBox="0 0 400 114" enable-background="new 0 0 400 114" >  <image id="image0" width="400" height="114" x="0" y="0"
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="400px" height="114px" viewBox="0 0 400 114" enable-background="new 0 0 400 114" xml:space="preserve">  <image id="image0" width="400" height="114" x="0" y="0"
     href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAByCAYAAAB9RIfxAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAA
 CXBIWXMAABYlAAAWJQFJUiTwAAAu7klEQVR42u2deXxU1fn/P59zZybJJJBIkGQCYohZEFSoQl1a
@@ -243,7 +218,3 @@ xGAwGAxR8f8Bm1TqSk2gHV0AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMTEtMjlUMTE6NTQ6MTcr
 MDE6MDAHsoMLAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTExLTI5VDExOjU0OjE3KzAxOjAwdu87
 twAAAABJRU5ErkJggg==" />
 </svg>
-
-  </div>
- 
-};

@@ -1,11 +1,11 @@
 //COMPONENTS
 //import { Container } from "@/ui/components/container/container";
-//import { Seo } from "@/ui/components/seo/seo";
+import { Seo } from "@/ui/components/seo";
 
 // DESIGN SYSTEM
-//import { Avatar } from "@/ui/design-system/avatar/avatar";
+import { Avatar } from "@/ui/design-system/avatar/avatar";
 import { Button } from "@/ui/design-system/button/button";
-//import { Logo } from "@/ui/design-system/logo/logo";
+import { Logo } from "@/ui/design-system/logo/logo";
 import { Typography } from "@/ui/design-system/typography/typography";
 import { Spinner } from "@/ui/design-system/spinner/spinner";
 
@@ -15,10 +15,10 @@ import { RiNotification2Fill, RiShieldUserLine } from "react-icons/ri";
 export default function DesignSystem() {
   return (
     <>
-      {/* <Seo
+       <Seo
         title="Design System"
         description="Design system of the coders monkeys application"
-      /> */}
+      /> 
       {/* <Layout> */}
       {/* <Container className="py-10 space-y-10"> */}
       {/* Typography */}
@@ -172,20 +172,20 @@ export default function DesignSystem() {
             Avatar
           </Typography>
           <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
-            {/* <Avatar
+             <Avatar
                   size="small"
-                  src="/assets/images/lore.jpg"
+                  src="/assets/images/pngwing.com.png"
                   alt="daniel-lincoln | Avatar"
                 />
                 <Avatar
-                  src="/assets/images/lore.jpg"
+                  src="/assets/images/pngwing.com.png"
                   alt="daniel-lincoln | Avatar"
                 />
                 <Avatar
                   size="large"
-                  src="/assets/images/photo-de-profil.jpg"
+                  src="/assets/images/pngwing.com.png"
                   alt="daniel-lincoln | Avatar"
-                /> */}
+                /> 
           </div>
         </div>
         {/* Logo */}
@@ -193,12 +193,12 @@ export default function DesignSystem() {
           <Typography variant="caption2" weight="medium">
             Logo
           </Typography>
-          {/* <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
+           <div className="flex items-center gap-2 p-5 border border-gray-400 rounded">
                 <Logo size="very-small" />
                 <Logo size="small" />
                 <Logo />
                 <Logo size="large" />
-              </div> */}
+              </div> 
         </div>
       </div>
       {/* Buttons */}

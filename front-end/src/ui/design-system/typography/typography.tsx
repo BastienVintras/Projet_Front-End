@@ -88,7 +88,7 @@ export const Typography = ({
 
   switch (theme) {
     case "black"://default
-      colorStyles = "txt-gray";
+      colorStyles = "text-gray";
 
       break;
     case "gray":

@@ -1,5 +1,6 @@
 import { IconProps } from "@/types/iconProps";
 import clsx from "clsx";
+import { Spinner } from "../spinner/spinner";
 
 interface Props {
   size?: "small" | "medium" | "large";
@@ -49,9 +50,9 @@ variantStyles=
      }
      if (iconTheme === "secondary"){
       variantStyles= 
-      "bg-primary-200 hover:primary-300/50 text-primary rounded-full"
+      "bg-primary-300 hover:bg-primary-300/50 text-primary rounded-full"
     }
-    if (iconTheme === "secondary"){
+    if (iconTheme === "gray"){
       variantStyles= 
       "bg-gray-700 hover:bg-gray-600 text-white rounded-full"
     }
@@ -84,21 +85,35 @@ variantStyles=
     <>
       <button
         type="button"
-        className={clsx(variantStyles,sizeStyles,icoSize)}
+        className={clsx(variantStyles,sizeStyles,icoSize,isLoading && "cursor-wait","relative")}//la position absolute du spinner est en fonction de la position relative dans le corp du bouton
         onClick={() => console.log("click")}
         disabled={disabled}
       >
+{isLoading && (
+  <div className="absolute inset-0 flex items-center justify-center">
+   {variant === "accent"|| variant ==="ico" ?(
+   <Spinner size="small" variant="white"/>
+   ):(
+   <Spinner size="small"/>)}
+
+  </div>
+)}
+
+
+       <div className={clsx(isLoading && "invisible")}>
         {/* Si c est une icone on affiche l icon dans un noeud "<> </>" sinon on affiche children */}
         {icon && variant ==="ico" ? (
         <icon.icon size={icoSize}/> 
-        ):
+        ):(
         // Si l icone existe la condition rentre dans cette classe la
          <div className= {clsx(icon && "flex items-center gap-1")}> 
-        {icon && iconPosition ==="left"&&(<icon.icon size ={icoSize}/> )} {/*condition ternaire*/}
+         {icon && iconPosition ==="left"&&(<icon.icon size ={icoSize}/> )} {/*condition ternaire*/}
         
         {children}
         {icon && iconPosition ==="right"&&(<icon.icon size ={icoSize}/> )}
-        </div> } 
+        </div>
+        )} 
+        </div> 
       
       </button>
     </>

@@ -33,7 +33,7 @@ interface Props {
 export const Typography = ({
   variant = "h3",
   component: Component = "div",
-  theme = "black",
+  theme = "white",
   weight = "regular",
   className,
   children,

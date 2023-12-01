@@ -28,11 +28,11 @@ export const Button = ({
 
   switch (variant) {
     case "accent": //Default
-      variantStyles = "bg-primary hover:primary-400 text-white rounded";
+      variantStyles = "bg-primary hover:bg-primary-400 text-white rounded";
 
       break;
     case "secondary":
-      variantStyles = "bg-primary-200 hover:primary-300/50 text-primary rounded"; //le /50 est la valeur de l opacité
+      variantStyles = "bg-primary-200 hover:bg-primary-300/50 text-primary rounded"; //le /50 est la valeur de l opacité
 
       break;
     case "outline":
@@ -85,7 +85,7 @@ variantStyles=
     <>
       <button
         type="button"
-        className={clsx(variantStyles,sizeStyles,icoSize,isLoading && "cursor-wait","relative")}//la position absolute du spinner est en fonction de la position relative dans le corp du bouton
+        className={clsx(variantStyles,sizeStyles,icoSize,isLoading && "cursor-wait","relative animate")}//la position absolute du spinner est en fonction de la position relative dans le corp du bouton
         onClick={() => console.log("click")}
         disabled={disabled}
       >

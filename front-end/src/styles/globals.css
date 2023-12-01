@@ -12,5 +12,20 @@
 @layer base {
     html{
     font-family :inter, system-ui, sans-serif;
+    background-color:black;
 }
+}
+a:hover{
+  /* @apply est une fonctionnalité des préprocesseurs CSS tels que Sass,
+   permettant d'appliquer un ensemble de propriétés CSS définies dans une classe à un autre sélecteur CSS,
+    facilitant ainsi la réutilisation et la modularité des styles. */
+  @apply text-primary;
+}
+.animate,a,a:hover{
+/* regler la transition des boutons, les 4 premieres instructions sont pour le muti-plateformes  */
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition:all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }

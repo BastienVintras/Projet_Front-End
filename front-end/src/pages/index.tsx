@@ -12,6 +12,7 @@ import { Spinner } from "@/ui/design-system/spinner/spinner";
 
 //ICO
 import { RiNotification2Fill, RiShieldUserLine } from "react-icons/ri";
+import { Footer } from "@/ui/components/navigation/footer";
 //import { Layout } from "@/ui/components/layout/layout";
 export default function DesignSystem() {
   return (
@@ -21,6 +22,7 @@ export default function DesignSystem() {
         description="Design system of the coders monkeys application"/> 
       {/* <Layout> */}
       <Navigation/>
+      <Footer/>
       </>
         
   );

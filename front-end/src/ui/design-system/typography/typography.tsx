@@ -18,7 +18,7 @@ interface Props {
     | "caption4";
 
   component?: "h1" | "h2" | "h3" | "h4" | "h5" | "div" | "p" | "span";
-  theme?: "black" | "white" | "gray" | "primary" | "secondary";
+  theme?: "black" | "white" | "gray" | "primary" | "secondary"|"mediumGray";
   weight?: "regular" | "medium";
   className?: string;
 
@@ -105,11 +105,11 @@ export const Typography = ({
       break;
     case "secondary":
       colorStyles = "text-secondary";
-
       break;
+      case "mediumGray":
+        colorStyles = "text-gray-800";
+        break;
 
-    default:
-      break;
   }
   // "clsx" = bibliotheque pour gérer de manière élégante et efficace les classes CSS conditionnelles.
   //  Elle permet de construire dynamiquement une chaîne de classes CSS en fonction de conditions.

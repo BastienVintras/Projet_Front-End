@@ -1,4 +1,5 @@
 import { AppLinks } from "@/types/app-links";
+import { RiLinkedinFill, RiSlackFill, RiYoutubeFill } from "react-icons/ri";
 
 const footerApplicationLinks:AppLinks[] =[
     {
@@ -62,21 +63,24 @@ const footerApplicationLinks:AppLinks[] =[
         type:"internal"
     }
 ]
-  const footerSocialNetworksLinks:AppLinks[] =[
+ export const footerSocialNetworksLinks:AppLinks[] =[
     {
         label: "Instagram",
         baseUrl : "https://www.instagram.com/adatechschool",
-        type:"external"
+        type:"external",
+        icon: RiYoutubeFill
     },
     {
         label: "Linkedin",
         baseUrl : "https://www.linkedin.com/school/ada-tech-school/",
-        type:"external"
+        type:"external",
+        icon: RiLinkedinFill
     },
     {
         label: "Slack",
         baseUrl : "https://ada-tech-school.slack.com",
-        type:"external"
+        type:"external",
+        icon: RiSlackFill
     },
 ]
 

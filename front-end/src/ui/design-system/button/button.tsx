@@ -1,6 +1,8 @@
 import { IconProps } from "@/types/iconProps";
 import clsx from "clsx";
 import { Spinner } from "../spinner/spinner";
+import { LinkType, LinkTypes } from "@/lib/link-type";
+import Link from "next/link";
 
 interface Props {
   size?: "small" | "medium" | "large";
@@ -11,6 +13,9 @@ interface Props {
   disabled?: boolean;
   isLoading?: boolean;
   children?: React.ReactNode;
+  baseUrl? : string,
+  linkType?:LinkType,
+  action?: Function
 }
 export const Button = ({
   size = "medium",
@@ -21,6 +26,9 @@ export const Button = ({
   disabled,
   isLoading,
   children,
+  baseUrl,
+  linkType = "internal",
+  action = ()=>{}
 }: Props) => {
   let variantStyles: string = "",
     sizeStyles: string = "",
@@ -80,16 +88,14 @@ variantStyles=
       icoSize = 24
       break;
   }
-
-  return (
+const handleClick = () => {
+  if(action){
+    action()
+  }
+}
+  const buttonContent = (
     <>
-      <button
-        type="button"
-        className={clsx(variantStyles,sizeStyles,icoSize,isLoading && "cursor-wait","relative animate")}//la position absolute du spinner est en fonction de la position relative dans le corp du bouton
-        onClick={() => console.log("click")}
-        disabled={disabled}
-      >
-{isLoading && (
+    {isLoading && (
   <div className="absolute inset-0 flex items-center justify-center">
    {variant === "accent"|| variant ==="ico" ?(
    <Spinner size="small" variant="white"/>
@@ -115,7 +121,31 @@ variantStyles=
         )} 
         </div> 
       
-      </button>
     </>
+  )
+
+  const buttonElement = (
+    <button
+    type="button"
+    className={clsx(variantStyles,sizeStyles,icoSize,isLoading && "cursor-wait","relative animate")}//la position absolute du spinner est en fonction de la position relative dans le corp du bouton
+    onClick= {handleClick}
+    disabled={disabled}
+  >
+{buttonContent}
+  </button>
   );
+  //Si c est un lien externe on presise le linkType External et on va recuperer l Url externe dans baseUrl
+if (baseUrl){
+ if(linkType === LinkTypes.EXTERNAL){
+  return(
+    <a href={baseUrl} target="_blank">
+      {buttonElement}
+    </a>
+  )
+ }else {//sinon lien interne
+  return <Link href={baseUrl}>{buttonElement}</Link>
+ }
+} 
+ return buttonElement
+  
 };

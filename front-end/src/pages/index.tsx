@@ -1,7 +1,7 @@
 //COMPONENTS
 import { Container } from "@/ui/components/container/container";
 import { Seo } from "@/ui/components/seo/seo";
-import { Navigation } from "@/ui/components/navigation/navigation";
+
 
 // DESIGN SYSTEM
 import { Avatar } from "@/ui/design-system/avatar/avatar";
@@ -12,17 +12,21 @@ import { Spinner } from "@/ui/design-system/spinner/spinner";
 
 //ICO
 import { RiNotification2Fill, RiShieldUserLine } from "react-icons/ri";
-import { Footer } from "@/ui/components/navigation/footer";
+
+import { Layout } from "@/ui/components/layout/layout";
+import { LandingPageContainer } from "@/ui/modules/landing-page/landing-page.container";
 //import { Layout } from "@/ui/components/layout/layout";
-export default function DesignSystem() {
+export default function Home() {
   return (
     <>
        <Seo
         title="Design System"
-        description="Design system of the coders monkeys application"/> 
+        description="Design system"
+        /> 
       {/* <Layout> */}
-      <Navigation/>
-      <Footer/>
+      <Layout>
+      <LandingPageContainer/>
+        </Layout>
       </>
         
   );

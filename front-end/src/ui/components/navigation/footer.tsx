@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid"; //Permet de générer un id unique automati
 import { ActiveLink } from "./active-link";
 import { FooterLinks } from "@/types/app-links";
 import { LinkTypes } from "@/lib/link-type";
+import { SocialNetworksButtons } from "./social-networks-buttons";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -49,7 +50,7 @@ export const Footer = () => {
               Bastien Vintras
             </a>
           </Typography>
-          <div></div>
+          <div className=""><SocialNetworksButtons theme="gray"/> </div>
         </div>
       </Container>
     </div>

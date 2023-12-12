@@ -27,17 +27,17 @@ const footerApplicationLinks:AppLinks[] =[
     },
     {
         label: "Connexion",
-        baseUrl : "/#",
+        baseUrl : "/connexion",
         type:"internal"
     },
     {
         label: "Inscription",
-        baseUrl : "/#",
+        baseUrl : "/connexion/inscription",
         type:"internal"
     },
     {
-        label: "Mot de passe oublié",
-        baseUrl : "/#",
+        label: "Mots de passe perdu",
+        baseUrl : "/connexion/mots-de-passe-perdu",
         type:"internal"
     }
 ];

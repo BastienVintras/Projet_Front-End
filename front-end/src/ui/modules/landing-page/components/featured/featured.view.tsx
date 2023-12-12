@@ -94,7 +94,7 @@ export const FeaturedView = () => {
               theme="black"
               className="mb-5"
             >
-              Passe à la transmission après la formation
+              Passe de la formation à la transmission
             </Typography>
             <Typography
               variant="body-lg"
@@ -108,7 +108,7 @@ export const FeaturedView = () => {
             </Typography>
             <Button
               variant="secondary"
-              baseUrl="/#"
+              baseUrl="/connexion"
               icon={{ icon: RiArrowRightLine }}
               iconPosition="right"
             >

@@ -34,8 +34,8 @@ export const Navigation = ({}: Props) => {
             <Link href="/contacts">Contacts</Link>
           </Typography>
           <div className="flex items-center gap-2">
-            <Button size="small">Connection</Button>
-            <Button size="small"variant="secondary">Rejoindre</Button>
+            <Button baseUrl="/connexion" size="small">Connection</Button>
+            <Button baseUrl="connexion/inscription" size="small"variant="secondary">Rejoindre</Button>
 
           </div>
         </div>

@@ -5,8 +5,12 @@ import { Container } from "@/ui/components/container/container";
 
 import Image from "next/image";
 import { LoginForm } from "./login-form";
+import { FormsType } from "@/types/forms";
 
-export const LoginView =()=>{
+interface Props {
+  form: FormsType;
+}
+export const LoginView =({form}:Props)=>{
     return( 
         <Container className="grid grid-cols-2 gap-20 mb-32 ">
         <div className="flex items-center">
@@ -19,7 +23,7 @@ export const LoginView =()=>{
             />
           </div>
         </div>
-        <div className="flex items-center py-96">
+        <div className="flex items-center py-40">
           <Box padding_y="5">
             <div className="flex items-center justify-between">
               <Typography variant="h5" component="h1">
@@ -34,7 +38,7 @@ export const LoginView =()=>{
                 </Typography>
               </div>
             </div>
-           <LoginForm/>
+           <LoginForm form={form}/>
           </Box>
         </div>
       </Container>

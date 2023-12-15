@@ -4,7 +4,7 @@ const nextConfig = {
   output: "export", // creer le dossier "out" avec npm run build
   images:{
     unoptimized: true,
-  }
+  },
 }
 
 

@@ -1,5 +1,5 @@
 export interface FormsType{
-    control : any;
+    control? : any;
     onSubmit :any;
     errors : any;
     isLoading :boolean;
@@ -11,4 +11,12 @@ export interface RegisterFormFieldsType{
     email : string;
     password : string;
     what_is_your_prom: string;
+}
+export interface LoginFormFieldsType{
+    email : string;
+    password : string;
+}
+export interface ForgetPasswordFormFieldsType{
+    email : string;
+   
 }

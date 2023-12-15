@@ -1,7 +1,27 @@
+import { FormsType } from "@/types/forms";
+import { Button } from "@/ui/design-system/button/button";
 import { Typography } from "@/ui/design-system/typography/typography"
+import { Input } from "@/ui/design-system/forms/input";
 
-export const ForgetPasswordForm =()=>{
-    return(
-        <Typography>Formulaire...</Typography>
-    )
+interface Props {
+    form: FormsType;
 }
+
+export const ForgetPasswordForm =({form}:Props)=>{
+    const {onSubmit, errors, isLoading, register, handleSubmit } = form;
+    return(
+        <form onSubmit={handleSubmit(onSubmit)} className="pt-8 pb-5 space-y-4">
+        <Input
+        isLoading = {isLoading}
+      placeholder= "alumiada@gmail.com"
+      type = "email"
+      register={register}
+      errors = {errors}
+      errorMsg ="Tu dois renseigner ce champs"
+      id="email"
+        />
+         
+        <Button isLoading={isLoading} type="submit" fullWith>Envoyer</Button>
+      </form>
+    );
+  };

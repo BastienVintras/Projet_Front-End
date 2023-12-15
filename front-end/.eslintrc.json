@@ -1,5 +1,5 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": ["next/babel","next/core-web-vitals"],
   "rules":{
     //Pour désactivé l erreur quand on utilise une "'" dans le html
     "react/no-unescaped-entities":"off"

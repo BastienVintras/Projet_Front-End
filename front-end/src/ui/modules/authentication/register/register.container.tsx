@@ -1,13 +1,17 @@
 import { SubmitHandler,useForm } from "react-hook-form";
 import { RegisterView } from "./register.view"
 import { RegisterFormFieldsType } from "@/types/forms";
-import { useState } from "react";
-import {createUserWithEmailAndPassword } from "firebase/auth";
-import {auth} from "@/config/firebase-config"
+import { firebaseCreateUser } from "@/api/authentication";
+import {toast } from 'react-toastify';
+import { useToggle } from "@/hooks/use-toggle";
 
 export const RegisterContainer =()=>{
-const [isLoading,setIsLoading] = useState <boolean>(false) 
-    const{
+const{
+    value : isLoading,
+    setValue : setIsLoading, 
+} = useToggle()
+    
+const{
         handleSubmit,
         formState : {errors},
         register,
@@ -15,12 +19,26 @@ const [isLoading,setIsLoading] = useState <boolean>(false)
         reset,
     } = useForm<RegisterFormFieldsType>();
 
-const handleCreateUserAUthentication =({email,password,what_is_your_prom}:RegisterFormFieldsType)=>{
+const handleCreateUserAUthentication = async ({
+    email,
+    password,
+    what_is_your_prom
+}:RegisterFormFieldsType)=>{
+    const {error,data} = await firebaseCreateUser(email,password);
+    if(error){
+        setIsLoading(false)
+        toast.error(error.message)
+        return;
+    }
+
+    toast.success("Bienvenue sur l'After Ada ")
+    setIsLoading(false);
+    reset();
 
 };
 const onSubmit: SubmitHandler<RegisterFormFieldsType> = async (formData)=>{
     setIsLoading(true)
-console.log("formData",formData);
+
 
 const{password} = formData;
 
@@ -32,7 +50,7 @@ if(password.length <= 5){
     });
     return; // evite d 'executer la fonction suivante si il y a une erreur de password
 }
-
+handleCreateUserAUthentication(formData)
 
 
 
@@ -47,9 +65,7 @@ if(password.length <= 5){
             handleSubmit,
             onSubmit,
             isLoading,
-        }}
-        
+        }}       
         />
-        
     )
 };

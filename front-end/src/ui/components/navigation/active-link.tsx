@@ -15,8 +15,7 @@ interface Props{
 export const ActiveLink =({href,children}:Props)=>{
 const router = useRouter();
 
-console.log("router::",router.pathname);
-console.log("href",href);
+
 
 
 

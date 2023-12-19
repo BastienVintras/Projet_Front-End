@@ -4,7 +4,7 @@ import {v4 as uuidv4 } from "uuid"
 import { footerSocialNetworksLinks } from "./app-links"
 import { Button } from "@/ui/design-system/button/button"
 import clsx from "clsx";
-import { LinkTypes } from "@/lib/link-type";
+
 
 
 interface Props{

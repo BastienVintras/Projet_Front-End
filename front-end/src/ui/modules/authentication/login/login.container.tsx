@@ -52,7 +52,7 @@ export const LoginContainer = () => {
     toast.success("Bienvenue sur l 'After Ada");
     setIsLoading(false);
     reset()
-    //router.push("/mon-espace");
+    router.push("/mon-espace");
   };
 
 

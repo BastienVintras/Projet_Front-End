@@ -1,9 +1,10 @@
 import { SubmitHandler,useForm } from "react-hook-form";
 import { RegisterView } from "./register.view"
 import { RegisterFormFieldsType } from "@/types/forms";
-import { firebaseCreateUser } from "@/api/authentication";
+import { firebaseCreateUser, sendEmailVerificationProcedure } from "@/api/authentication";
 import {toast } from 'react-toastify';
 import { useToggle } from "@/hooks/use-toggle";
+import { firestoreCreateDocument} from "@/api/firestore";
 
 export const RegisterContainer =()=>{
 const{
@@ -19,7 +20,24 @@ const{
         reset,
     } = useForm<RegisterFormFieldsType>();
 
-const handleCreateUserAUthentication = async ({
+const handleCreateUserDocument = async(collectionName: string, documentID: string, document: object)=>{
+    const {error} = await firestoreCreateDocument(
+        collectionName,
+        documentID,
+        document
+        );
+        if (error){
+            toast.error(error.message);
+            setIsLoading(false);
+            return;
+        }
+        toast.success("Bienvenue sur l'After Ada ")
+    setIsLoading(false);
+    reset();
+    sendEmailVerificationProcedure()
+}
+
+const handleCreateUserAuthentication = async ({
     email,
     password,
     what_is_your_prom
@@ -30,12 +48,17 @@ const handleCreateUserAUthentication = async ({
         toast.error(error.message)
         return;
     }
-
-    toast.success("Bienvenue sur l'After Ada ")
-    setIsLoading(false);
-    reset();
+    
+const userDocumentData = {
+    email: email,
+    what_is_your_prom: what_is_your_prom,
+    uid: data.uid,
+    creation_date: new Date(),
+}
+    handleCreateUserDocument("users", data.uid,userDocumentData)
 
 };
+
 const onSubmit: SubmitHandler<RegisterFormFieldsType> = async (formData)=>{
     setIsLoading(true)
 
@@ -50,7 +73,7 @@ if(password.length <= 5){
     });
     return; // evite d 'executer la fonction suivante si il y a une erreur de password
 }
-handleCreateUserAUthentication(formData)
+handleCreateUserAuthentication(formData)
 
 
 

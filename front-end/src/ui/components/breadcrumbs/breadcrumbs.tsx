@@ -1,7 +1,7 @@
 import { Typography } from "@/ui/design-system/typography/typography";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import { RiHome2Line, RiHome3Line } from "react-icons/ri";
+import { RiHome3Line } from "react-icons/ri";
 import { v4 as uuidv4 } from "uuid";
 import { Container } from "../container/container";
 import Link from "next/link";

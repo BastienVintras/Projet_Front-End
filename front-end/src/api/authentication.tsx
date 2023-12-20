@@ -1,7 +1,7 @@
 //Permet de centraliser dans ce fichier les appels api à firebase et ainsi pouvoir
 //changer facilement d'api si besoin
 
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword,signOut,sendPasswordResetEmail, sendEmailVerification } from "firebase/auth";
 import { auth } from "@/config/firebase-config";
 import { FirebaseError } from "firebase/app";
 
@@ -40,6 +40,64 @@ export const firebaseSignInUser = async (email: string, password: string) => {
       error: {
         code: firebaseError.code,
         message: firebaseError.message,
+      },
+    };
+  }
+};
+export const firebaseLogoutUser = async () => {
+  try {
+   await signOut(auth);
+    return { data:true };
+
+  } catch (error) {
+    const firebaseError = error as FirebaseError;
+    //...@ todo format error
+    return {
+      error: {
+        code: firebaseError.code,
+        message: firebaseError.message,
+      },
+    };
+  }
+};
+export const sendEmailToResetPassword = async (email:string) => {
+  try {
+   await sendPasswordResetEmail(auth, email);
+    return { data:true };
+    
+  } catch (error) {
+    const firebaseError = error as FirebaseError;
+    //...@ todo format error
+    return {
+      error: {
+        code: firebaseError.code,
+        message: firebaseError.message,
+      },
+    };
+  }
+};
+
+export const sendEmailVerificationProcedure = async () => {
+  if(auth.currentUser){
+  try {
+   await sendEmailVerification(auth.currentUser);
+    return { data:true };
+    
+  } catch (error) {
+    const firebaseError = error as FirebaseError;
+    //...@ todo format error
+    return {
+      error: {
+        code: firebaseError.code,
+        message: firebaseError.message,
+        },
+      };
+    }
+  }else {
+    return {
+      error : {
+        code:"unknow",
+        message : "Une erreur est survenue"
       },
     };
   }

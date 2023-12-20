@@ -17,16 +17,13 @@ export const LoginContainer = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
+     
         console.log("user", user);
         // ...
       } else {
         console.log("tu n'es pas connecté");
 
-        // User is signed out
-        // ...
+        
       }
     });
   }, []);

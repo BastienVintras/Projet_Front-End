@@ -6,7 +6,7 @@ export interface UserInterface {
     displayName: string | null;
     emailVerified : boolean;
     phoneNumber: string | null;
-    photoUrl: string | null;
+    photoURL: string | null;
     userDocument?: UserDocument;
 }
 export interface UserDocument {

@@ -1,6 +1,7 @@
-import { auth } from "@/config/firebase-config";
-import { UserInterface } from "@/types/user";
+import { auth, db } from "@/config/firebase-config";
+import { UserDocument, UserInterface } from "@/types/user";
 import { User, onAuthStateChanged } from "firebase/auth";
+import { onSnapshot, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function useFirebaseAuth() {
@@ -18,7 +19,15 @@ export default function useFirebaseAuth() {
 
 const getUserDocument = async(user: UserInterface) =>{
     if (auth.currentUser){
-        //get document firestore
+        const documentRef = doc(db,"user",auth.currentUser.uid)
+        const compactUser = user;
+
+        onSnapshot(documentRef, async (doc) => {
+            if(doc.exists()){
+                compactUser.userDocument=doc.data() as UserDocument
+            }
+            setAuthUser(compactUser)//utilisateur mis a jour
+        })
     }
 }
 

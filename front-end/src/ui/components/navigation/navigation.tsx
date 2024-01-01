@@ -5,13 +5,28 @@ import { Button } from "@/ui/design-system/button/button";
 import Link from "next/link";
 import { ActiveLink } from "./active-link";
 import { useAuth } from "@/context/authUserContext";
+import { AccountAvatarNavigationLink } from "./account-avatar-navigation-link";
 
 interface Props {}
 
 export const Navigation = ({}: Props) => {
-  const { authUser, authUserIsLoading } = useAuth(); //useAuth provient de authUserContext.tsx
+  const { authUser} = useAuth(); //useAuth provient de authUserContext.tsx
   console.log("authUser", authUser);
-  console.log("authUserIsLoading", authUserIsLoading);
+  
+  const authentificationSystem = (
+    <div className="flex items-center gap-2">
+              <Button baseUrl="/connexion" size="small">
+                Connection
+              </Button>
+              <Button
+                baseUrl="connexion/inscription"
+                size="small"
+                variant="secondary"
+              >
+                Rejoindre
+              </Button>
+            </div>
+  )
 
   return (
     <div className="border-b-2 border-gray-400">
@@ -41,19 +56,8 @@ export const Navigation = ({}: Props) => {
             <Link href="/formations">Formation</Link>
             <Link href="/contacts">Contacts</Link>
           </Typography>
-         
-            <div className="flex items-center gap-2">
-              <Button baseUrl="/connexion" size="small">
-                Connection
-              </Button>
-              <Button
-                baseUrl="connexion/inscription"
-                size="small"
-                variant="secondary"
-              >
-                Rejoindre
-              </Button>
-            </div>
+         {!authUser ? authentificationSystem : <AccountAvatarNavigationLink/> }
+            
           
         </div>
       </Container>

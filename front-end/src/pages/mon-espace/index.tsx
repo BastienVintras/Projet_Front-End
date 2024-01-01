@@ -1,4 +1,4 @@
-import { REGISTERED } from "@/lib/session-status-";
+import { REGISTERED } from "@/lib/session-status";
 import { Layout } from "@/ui/components/layout/layout";
 import { Seo } from "@/ui/components/seo/seo";
 import { UserAccountContainer } from "@/ui/modules/user-profile/user-account/user-account.container";
@@ -6,7 +6,7 @@ import { UserAccountContainer } from "@/ui/modules/user-profile/user-account/use
 
 
 //import { Layout } from "@/ui/components/layout/layout";
-export default function Connexion() {
+export default function UserAccount() {
   return (
     <>
        <Seo

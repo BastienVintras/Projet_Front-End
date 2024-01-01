@@ -26,7 +26,7 @@ interface Props {
     }
 return <div className={clsx(sizeStyles,"bg-gray-400 rounded-full relative")}>
     <Image
-    fill src={src}alt={alt} className="object-cover object-center rounded-full"
+    fill src={src ? src : "/assets/svg/alumni.svg"}alt={alt} className="object-cover object-center rounded-full"
     
     />
 </div>

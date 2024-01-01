@@ -14,5 +14,6 @@ export interface UserDocument {
     email: string;
     what_is_your_prom: string
     creation_date: Timestamp
+    onboardingIsCompleted: boolean;
     //..
 }

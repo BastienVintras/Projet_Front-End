@@ -24,7 +24,7 @@ export const HeroTopView =()=>{
             alt="Illustation D'une fusée pour matérialiser l'évolution du level des dev front-end"
             width={380}
             height={596}
-            className="pt-10 absolute top-0 right-20 z-0"
+            className="pt-10 absolute top-0 right-20 z-0 "
             />
         </Container>
     )

@@ -25,7 +25,7 @@ export const Logo = ({ size = "medium" }: Props) => {
   return <div> 
     
 
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" width={sizeLogo} viewBox="0 0 400 114" enable-background="new 0 0 400 114" >  <image id="image0" width="400" height="114" x="0" y="0"
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" width={sizeLogo} viewBox="0 0 400 114" enableBackground="new 0 0 400 114" >  <image id="image0" width="400" height="114" x="0" y="0"
     href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAByCAYAAAB9RIfxAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAA
 CXBIWXMAABYlAAAWJQFJUiTwAAAu7klEQVR42u2deXxU1fn/P59zZybJJJBIkGQCYohZEFSoQl1a

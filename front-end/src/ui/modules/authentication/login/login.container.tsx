@@ -23,7 +23,7 @@ export const LoginContainer = () => {
 
   const handleSignInUser = async ({
      email,
-     password 
+     password,
     }: LoginFormFieldsType) => {
     const { error } = await firebaseSignInUser(email, password);
     if (error) {

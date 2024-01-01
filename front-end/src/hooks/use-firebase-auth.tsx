@@ -8,52 +8,49 @@ export default function useFirebaseAuth() {
   const [authUser, setAuthUser] = useState<UserInterface | null>(null); //null si l'utilisateur n 'est pas connecté
   const [authUserIsLoading, setAuthUserIsLoading] = useState<boolean>(true); //est qu on est en train de charger?
 
-  const formatAuthUser = (user: UserInterface) =>({
+  const formatAuthUser = (user: UserInterface) => ({
     uid: user.uid,
     email: user.email,
     displayName: user.displayName,
     emailVerified: user.emailVerified,
     phoneNumber: user.phoneNumber,
-    photoUrl: user.photoURL,
-  })
+    photoURL: user.photoURL,
+  });
 
-const getUserDocument = async(user: UserInterface) =>{
-    if (auth.currentUser){
-        const documentRef = doc(db,"user",auth.currentUser.uid)
-        const compactUser = user;
-
-        onSnapshot(documentRef, async (doc) => {
-            if(doc.exists()){
-                compactUser.userDocument=doc.data() as UserDocument
-            }
-            setAuthUser(compactUser)//utilisateur mis a jour
-        })
-    }
-}
-
-const authStateChanged = async(authState: UserInterface | User |null) => {
-    if(!authState){
-        setAuthUser(null);
+  const getUserDocument = async (user: UserInterface) => {
+    if (auth.currentUser) {
+      const documentRef = doc(db, "users", auth.currentUser.uid); //"users est le nom de la collection"
+      const compactUser = user;
+      console.log(documentRef);
+      onSnapshot(documentRef, async (doc) => {
+        if (doc.exists()) {
+          compactUser.userDocument = doc.data() as UserDocument;
+        }
+        setAuthUser((prevAuthUser) => ({
+          ...prevAuthUser, //etat precedent
+          ...compactUser, // nouvel etat mis a jour, changement de state
+        }));
         setAuthUserIsLoading(false);
-        return;
+        console.log(onSnapshot);
+      });
+    }
+  };
+
+  const authStateChanged = async (authState: UserInterface | User | null) => {
+    if (!authState) {
+      setAuthUser(null);
+      setAuthUserIsLoading(false);
+      return;
     }
     setAuthUserIsLoading(true);
-    const formatedUser = formatAuthUser(authState);
-    await getUserDocument(formatedUser)
+    const formattedUser = formatAuthUser(authState);
+    await getUserDocument(formattedUser);
+  };
 
-    
 
-}
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        console.log("user", user);
-      } else {
-        console.log("tu n'es pas connecté");
-      }
-    });
-    return () => unsubscribe()
+    const unsubscribe = onAuthStateChanged(auth, authStateChanged);
+    return () => unsubscribe();
   }, []);
 
   return {
@@ -61,3 +58,14 @@ const authStateChanged = async(authState: UserInterface | User |null) => {
     authUserIsLoading,
   };
 }
+
+//Ce hook utilise les fonctions useState et
+//useEffect de React pour gérer l'état de l'utilisateur authentifié et le chargement de l'authentification.
+//Il utilise également des fonctions Firebase,
+//telles que onAuthStateChanged pour détecter les changements d'état d'authentification,
+//et onSnapshot pour écouter les modifications de documents Firestore.
+//Le hook renvoie un objet contenant authUser (l'utilisateur authentifié) et authUserIsLoading (l'état de chargement).
+
+//En résumé, ce code permet de suivre l'état d'authentification de l'utilisateur,
+//de récupérer des détails supplémentaires de l'utilisateur à partir de Firestore et
+//de fournir ces informations sous forme de retour d'un hook personnalisé.

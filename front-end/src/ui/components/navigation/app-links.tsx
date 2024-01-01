@@ -22,7 +22,7 @@ const footerApplicationLinks:AppLinks[] =[
  const footerUsersLinks:AppLinks[] =[
     {
         label: "Mon espace",
-        baseUrl : "/#",
+        baseUrl : "/mon-espace",
         type:"internal"
     },
     {
@@ -82,6 +82,7 @@ const footerApplicationLinks:AppLinks[] =[
         type:"external",
         icon: RiSlackFill
     },
+    
 ]
 
 export const footerLinks = [

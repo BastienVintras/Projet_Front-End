@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Button } from "@/ui/design-system/button/button";
 import { Typography } from "@/ui/design-system/typography/typography";
 import { ActiveLink } from "./active-link";
+import router from "next/router";
 
 export const UserAccountNavigation = () => {
   const handleLogOutUser = async () => {
@@ -12,6 +13,7 @@ export const UserAccountNavigation = () => {
       toast.error(error.message);
     }
     toast.success("A bientôt sur l'After");
+    
   };
 
   return (

@@ -2,6 +2,7 @@ import { Seo } from "@/ui/components/seo/seo";
 import { Layout } from "@/ui/components/layout/layout";
 import { LandingPageContainer } from "@/ui/modules/landing-page/landing-page.container";
 import { RegisterContainer } from "@/ui/modules/authentication/register/register.container";
+import { GUEST } from "@/lib/session-status-";
 
 
 //import { Layout } from "@/ui/components/layout/layout";
@@ -13,7 +14,7 @@ export default function Register() {
         description="page d'inscription"
         /> 
      
-      <Layout>
+      <Layout sessionStatus={GUEST}>
       <RegisterContainer/>
         </Layout>
       </>

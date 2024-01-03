@@ -17,6 +17,10 @@ export const OnboadingContainer =()=>{
             id: 2, label:"Profile",
              component: {step: ProfileStep }
         },
+        {
+            id: 3, label:"Avatar",
+             component: {step: ProfileStep }
+        },
     ];
 
     const getCurrentStep = ()=> {
@@ -29,7 +33,7 @@ export const OnboadingContainer =()=>{
         }
     };
     const prev = () => {
-        if (currentStep > stepList.length){
+        if (currentStep > 1){
             setCurrentStep(currentStep - 1)
         }
     };

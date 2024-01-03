@@ -11,6 +11,7 @@ interface Props{
     id:string;
     required?: boolean;
     isAutocompleted?: boolean;
+    label?:string;
 
 }
 
@@ -23,15 +24,25 @@ export const Input =({
     errorMsg= "Tu dois renseigner ce champs",
     id,
     required=true,
-    isAutocompleted =false}:Props)=>{
+    isAutocompleted =false,
+    label,
+  }:Props)=>{
         
     return(
         <div className="space-y-2">
-       
+       {label && (
+        <Typography
+        variant="caption4"
+        component="div"
+        theme={errors[id] ? "danger" : "gray-400"}
+        >
+          {label}
+          </Typography>
+       )}
         <input 
         type={type}
         placeholder={placeholder}
-        className={clsx(isLoading && "cursor-not-allowed",
+        className={clsx(isLoading ?  "bg-gray-600 focus:ring-gray-400 cursor-not-allowed" : "bg-white" ,
             errors[id]
              ?"placeholder-alert-danger text-alert-danger"
              :" placeholder-gray-600",

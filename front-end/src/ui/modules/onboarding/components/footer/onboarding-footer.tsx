@@ -27,7 +27,7 @@ export const OnboardingFooter = ({
   }
 
   return (
-    <div className="absolute bottom-0 left-0 w-full p-5 bg-white border-t border-gray-400">
+    <div className="absolute bottom-0 left-0 w-full p-5 bg-black border-t border-gray-400">
       <div className={clsx(
         prev && !next && "justify-start",
         !prev && next && "justify-end",
@@ -40,7 +40,7 @@ export const OnboardingFooter = ({
             disabled={isLoading}
             variant={!isLoading ? "outline" : "disabled"}
             action={prev}
-          >
+          >            
             Retour
           </Button>
         )}

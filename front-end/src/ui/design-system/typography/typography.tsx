@@ -18,7 +18,7 @@ interface Props {
     | "caption4";
 
   component?: "h1" | "h2" | "h3" | "h4" | "h5" | "div" | "p" | "span";
-  theme?: "black" | "white" | "gray" | "primary" | "secondary"|"mediumGray"|"danger"|"success"|"warning";
+  theme?: "black" | "white" | "gray" |"gray-400"|"gray-800"| "primary" | "secondary"|"mediumGray"|"danger"|"success"|"warning";
   weight?: "regular" | "medium";
   className?: string;
 
@@ -91,10 +91,21 @@ export const Typography = ({
       colorStyles = "text-gray";
 
       break;
+
+      case "gray-400":
+        colorStyles = "text-gray-400";
+        
+        break;
+
     case "gray":
       colorStyles = "text-gray-700";
-
+      
       break;
+    case "gray-800":
+      colorStyles = "text-gray-800";
+      
+      break;
+
     case "white":
       colorStyles = "text-white";
 

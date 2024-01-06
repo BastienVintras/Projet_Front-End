@@ -1,9 +1,16 @@
 //Permet de centraliser dans ce fichier les appels api à firebase et ainsi pouvoir
 //changer facilement d'api si besoin
 
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword,signOut,sendPasswordResetEmail, sendEmailVerification } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+} from "firebase/auth";
 import { auth } from "@/config/firebase-config";
 import { FirebaseError } from "firebase/app";
+import { getFirebaseErrorMessage } from "@/utils/getFirebaseErrorMessage";
 
 export const firebaseCreateUser = async (email: string, password: string) => {
   try {
@@ -15,11 +22,15 @@ export const firebaseCreateUser = async (email: string, password: string) => {
     return { data: userCredential.user };
   } catch (error) {
     const firebaseError = error as FirebaseError;
-    //...@ todo format error
+
+    const errorMessage = getFirebaseErrorMessage(
+      "createUserWithEmailAndPassword",
+      firebaseError.code
+    );
     return {
       error: {
         code: firebaseError.code,
-        message: firebaseError.message,
+        message: errorMessage,
       },
     };
   }
@@ -35,70 +46,117 @@ export const firebaseSignInUser = async (email: string, password: string) => {
     return { data: userCredential.user };
   } catch (error) {
     const firebaseError = error as FirebaseError;
-    //...@ todo format error
+
+    const errorMessage = getFirebaseErrorMessage(
+      "signInWithEmailAndPassword",
+      firebaseError.code
+    );
     return {
       error: {
         code: firebaseError.code,
-        message: firebaseError.message,
+        message: errorMessage,
       },
     };
   }
 };
 export const firebaseLogoutUser = async () => {
   try {
-   await signOut(auth);
-    return { data:true };
-
+    await signOut(auth);
+    return { data: true };
   } catch (error) {
     const firebaseError = error as FirebaseError;
-    //...@ todo format error
+    
+    const errorMessage = getFirebaseErrorMessage(
+      "signOut",
+      firebaseError.code
+    );
     return {
       error: {
         code: firebaseError.code,
-        message: firebaseError.message,
+        message: errorMessage,
       },
     };
   }
 };
-export const sendEmailToResetPassword = async (email:string) => {
+export const sendEmailToResetPassword = async (email: string) => {
   try {
-   await sendPasswordResetEmail(auth, email);
-    return { data:true };
-    
+    await sendPasswordResetEmail(auth, email);
+    return { data: true };
   } catch (error) {
     const firebaseError = error as FirebaseError;
-    //...@ todo format error
+    
+    const errorMessage = getFirebaseErrorMessage(
+      "sendPasswordResetEmail",
+      firebaseError.code
+    );
+
     return {
       error: {
         code: firebaseError.code,
-        message: firebaseError.message,
+        message: errorMessage,
       },
     };
   }
 };
 
 export const sendEmailVerificationProcedure = async () => {
-  if(auth.currentUser){
-  try {
-   await sendEmailVerification(auth.currentUser);
-    return { data:true };
-    
-  } catch (error) {
-    const firebaseError = error as FirebaseError;
-    //...@ todo format error
-    return {
-      error: {
-        code: firebaseError.code,
-        message: firebaseError.message,
+  if (auth.currentUser) {
+    try {
+      await sendEmailVerification(auth.currentUser);
+      return { data: true };
+    } catch (error) {
+      const firebaseError = error as FirebaseError;
+      
+      const errorMessage = getFirebaseErrorMessage(
+        "sendEmailVerification",
+        firebaseError.code
+      );
+
+      return {
+        error: {
+          code: firebaseError.code,
+          message: errorMessage,
         },
       };
     }
-  }else {
+  } else {
     return {
-      error : {
-        code:"unknow",
-        message : "Une erreur est survenue"
+      error: {
+        code: "unknow",
+        message: "Une erreur est survenue",
       },
     };
   }
+};
+export const updateUserIdenticationData = async (uid: string, data: any) => {
+  const result = await fetch(
+    "https://us-central1-app-bast.cloudfunctions.net/updateUser",
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        uid: uid,
+        data: data,
+      }),
+    }
+  );
+  if (!result.ok) {
+    const errorResponse = await result.json();
+    const firebaseError = errorResponse as FirebaseError;
+
+    const errorMessage = getFirebaseErrorMessage(
+      "updateUserIdenticationData",
+      firebaseError.code
+    );
+
+    return {
+      error: {
+        code: firebaseError.code,
+        message: errorMessage,
+      },
+    };
+  }
+  return { data: true };
 };

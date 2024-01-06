@@ -1,0 +1,6 @@
+{
+  "signInWithEmailAndPassword": {
+    "auth/user-not-found": "Connexion impossible, cette adresse n'existe pas."
+  },
+  "an_unknown_error_has_occurred": "Une erreur inconnue est survenue. Veuillez réessayer ultérieurement, contactez-nous si le problème persiste."
+}

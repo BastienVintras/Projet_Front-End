@@ -11,6 +11,7 @@ import { firestoreUpdateDocument } from "@/api/firestore"
 import { useAuth } from "@/context/authUserContext"
 import { toast } from "react-toastify"
 import { useEffect } from "react"
+import { updateUserIdenticationData } from "@/api/authentication"
 
 export const ProfileStep = ({
 next,
@@ -21,6 +22,7 @@ prev,
 stepList,
 }:BaseComponentProps) => {
     const {authUser} = useAuth();
+    
 
 const{value :isLoading, setValue :setLoading} = useToggle();
 const {
@@ -74,6 +76,26 @@ const onSubmit: SubmitHandler<OnboardingProfileFormFieldsType> = async(
             expertise != formData.expertise ||
             biography != formData.biography
         ){
+            if(
+                displayName != formData.displayName ||
+                authUser.displayName !== formData.displayName
+                ){
+                    const data = {
+                        displayName: formData.displayName
+                    }
+
+                    const {error} = await updateUserIdenticationData(
+                        authUser.uid,
+                        data
+                    );
+
+                    if (error){
+                        setLoading(false);
+                        toast.error(error.message);
+                        return;
+                    }
+                }
+
             handleUpdateUserDocument(formData);
         }
         setLoading(false);

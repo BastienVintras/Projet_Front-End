@@ -12,7 +12,7 @@ export const ProfileStepForm = ({form}:Props) => {
     return(
     <form className="w-full max-w-md space-y-4">
         <Input 
-        label="Nom d'utlistaeur"
+        label="Nom d'utilisateur"
         isLoading={isLoading}
         placeholder="john doe"
         type="text"

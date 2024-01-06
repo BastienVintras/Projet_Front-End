@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 
 interface Props {
-    size?: "small" | "medium" | "large";
+    size?: "small" | "medium" | "large"|"extralarge";
     src: string;
     alt: string;
   }
@@ -22,6 +22,10 @@ interface Props {
   
       case "large":
         sizeStyles = "w-[50px] h-[50px]";
+        break;
+
+        case "extralarge":
+        sizeStyles = "w-[130px] h-[130px]";
         break;
     }
 return <div className={clsx(sizeStyles,"bg-gray-400 rounded-full relative")}>

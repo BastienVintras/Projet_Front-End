@@ -3,6 +3,7 @@ import { OnboardingView } from "./onbording.view"
 import { WelcomeStep } from "./components/steps/welcome-step/welcome-step";
 import { onboardingStepListInterface } from "@/types/onboarding-steps-list";
 import { ProfileStep } from "./components/steps/profile-step/profile-step";
+import { AvatarStep } from "./components/steps/avatar-step/avatar-step";
 
 export const OnboadingContainer =()=>{
     
@@ -19,7 +20,7 @@ export const OnboadingContainer =()=>{
         },
         {
             id: 3, label:"Avatar",
-             component: {step: ProfileStep }
+             component: {step: AvatarStep }
         },
     ];
 

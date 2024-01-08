@@ -94,6 +94,7 @@ const onSubmit: SubmitHandler<OnboardingProfileFormFieldsType> = async(
                         toast.error(error.message);
                         return;
                     }
+                    
                 }
 
             handleUpdateUserDocument(formData);

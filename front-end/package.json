@@ -13,6 +13,7 @@
     "firebase": "^10.6.0",
     "next": "^14.0.3",
     "react": "^18",
+    "react-canvas-confetti": "^1.4.0",
     "react-dom": "^18",
     "react-hook-form": "^7.49.0",
     "react-icons": "^4.12.0",

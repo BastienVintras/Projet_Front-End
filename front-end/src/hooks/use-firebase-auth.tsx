@@ -8,6 +8,16 @@ export default function useFirebaseAuth() {
   const [authUser, setAuthUser] = useState<UserInterface | null>(null); //null si l'utilisateur n 'est pas connecté
   const [authUserIsLoading, setAuthUserIsLoading] = useState<boolean>(true); //est qu on est en train de charger?
 
+  //fonction de rechargement des donnée utilsateur
+  const reloadAuthUserData = () => {
+    if(auth.currentUser){
+      auth.currentUser.reload().then(() => {
+        authStateChanged(auth.currentUser)
+      })
+
+    }
+  }
+
   const formatAuthUser = (user: UserInterface) => ({
     uid: user.uid,
     email: user.email,
@@ -21,7 +31,6 @@ export default function useFirebaseAuth() {
     if (auth.currentUser) {
       const documentRef = doc(db, "users", auth.currentUser.uid); //"users est le nom de la collection"
       const compactUser = user;
-      console.log(documentRef);
       onSnapshot(documentRef, async (doc) => {
         if (doc.exists()) {
           compactUser.userDocument = doc.data() as UserDocument;
@@ -31,7 +40,6 @@ export default function useFirebaseAuth() {
           ...compactUser, // nouvel etat mis a jour, changement de state
         }));
         setAuthUserIsLoading(false);
-        console.log(onSnapshot);
       });
     }
   };
@@ -56,6 +64,7 @@ export default function useFirebaseAuth() {
   return {
     authUser,
     authUserIsLoading,
+    reloadAuthUserData
   };
 }
 

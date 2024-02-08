@@ -14,6 +14,7 @@ interface Props {
    | "ico"
    |"danger"
    |"success"
+   |"black"
   icon?: IconProps;
   iconTheme?: "accent" | "secondary" | "gray";
   iconPosition?: "left" | "right";
@@ -73,6 +74,10 @@ export const Button = ({
       case "danger":
       variantStyles =
         "bg-alert-danger hover:bg-alert-danger/75 text-white rounded";
+      break;
+      case "black":
+      variantStyles =
+        "bg-gray hover:bg-gray-800 text-white rounded";
       break;
 
     case "ico":

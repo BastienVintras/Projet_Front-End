@@ -19,6 +19,8 @@ export interface UserDocument {
     expertise : string;
     biography : string;
     photoURL : string | null;
+    linkedin : string
+    github : string
 
     
 }

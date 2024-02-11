@@ -70,7 +70,9 @@ export const AvatarStep = ({
     if (error){
       toggle();
       toast.error(error.message);
+      return;
     }
+    
     toggle();
     next()
 

@@ -8,13 +8,16 @@ interface Props {
     imagePreview : string | ArrayBuffer | null;
     uploadProgress: number;
     isLoading: boolean;
+    variant?: "primary" | "outline";
 }
 
 export const UploadAvatar = ({
     handleImageSelect,
     imagePreview,
     uploadProgress,
-    isLoading}:Props) => {
+    isLoading,
+    variant = "primary"
+}:Props) => {
 
         const {authUser} = useAuth()
 
@@ -29,7 +32,9 @@ const uploadProgressBarStyle = `fixed top-0 left-0 w-full h-1 bg-secondary anima
 
             <label className={clsx(
                 isLoading ? "cursor-not-allowed" : "cursor-pointer",
-                "inline-block bg-primary hover:bg-primary-400 text-white rounded px-[18px] py-[15px] text-caption-2 font-medium  animate"
+                variant === "primary" && " bg-primary hover:bg-primary-400 text-white",
+                variant === "outline" && "bg-white hover:bg-secondary border border-gray-700 text-gray-800",
+                "inline-block rounded px-[18px] py-[15px] text-caption-2 font-medium  animate"
                 )}>
                 <div className="flex items-center gap-2">
                     <RiCameraFill/>

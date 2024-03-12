@@ -4,6 +4,7 @@ import { UserInterface } from '@/types/user';
 import { db, storage } from '@/config/firebase-config';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+
 export const addUserProject = async (userId: string, project: Project, imageFile: File) => {
   try {
     const storage = getStorage();
@@ -46,10 +47,11 @@ export const updateUserProject = async (userId: string, projectId: string, proje
 };
 
 export const deleteUserProject = async (userId: string, projectId: string) => {
-  const projectRef = doc(db, 'users', userId, 'projects', projectId);
   
+  const projectRef = doc(db, 'users', userId, 'projects', projectId);
   try {
     await deleteDoc(projectRef);
+    console.log("Project deleted successfully");
   } catch (error) {
     console.error('Error deleting project: ', error);
   }

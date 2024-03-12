@@ -32,9 +32,14 @@ export interface UserDocument {
 //     projects: Project[];
 // }
 export interface Project {
+    [x: string]: string;
     
     
     projectName: string;
     stackProject: string;
     // photoURL: any;
+  }
+  export interface ProjectWithId extends Project {
+    id: string;
+    setProjects : any
   }

@@ -52,8 +52,8 @@ export const Navigation = ({}: Props) => {
             className="flex items-center gap-7"
           >
             <ActiveLink href="/design-system">Design system</ActiveLink>
-            <Link href="/projets">Projets</Link>
-            <Link href="/formations">Formation</Link>
+            <Link href="/projets">Fils de discussion</Link>
+            <Link href="/mes-projets">Projets</Link>
             <Link href="/contacts">Contacts</Link>
           </Typography>
          {!authUser ? authentificationSystem : <AccountAvatarNavigationLink/> }

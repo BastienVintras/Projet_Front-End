@@ -45,7 +45,7 @@ export const Footer = () => {
             <a
               href="https://github.com/BastienVintras"
               target="_blank"
-              className="underline hover:text-gray-600"
+              className="underline hover:text-primary"
             >
               Bastien Vintras
             </a>

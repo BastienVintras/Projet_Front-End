@@ -1,6 +1,7 @@
-import { doc,setDoc, updateDoc } from "firebase/firestore";
-import { db } from "@/config/firebase-config";
+import { addDoc, collection, doc,getDocs,setDoc, updateDoc } from "firebase/firestore";
+import { auth, db } from "@/config/firebase-config";
 import { FirebaseError } from "firebase/app";
+import { Project } from "@/types/user";
 
 
 export const firestoreCreateDocument = async (

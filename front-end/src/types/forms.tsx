@@ -32,4 +32,12 @@ export interface UserProfileFormFieldsType {
     biography: string;
     github : string;
     linkedin : string;
+    
+}
+export interface UserProjectsFormFieldsType {
+    projectName?: string;
+    stackProject?: string;
+    urlProject?: string;
+    githubProject?: string;
+    projectDescription?: string;
 }

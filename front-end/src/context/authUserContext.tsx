@@ -1,7 +1,7 @@
 //Cette déclaration importe un hook personnalisé pour gérer l'authentification avec Firebase.
 // Il contient une logique liée à l'authentification des utilisateurs à l'aide de Firebase.
 import useFirebaseAuth from "@/hooks/use-firebase-auth"
-import { UserDocument } from "@/types/user"
+import { UserDocument} from "@/types/user"
 import { useContext,createContext } from "react"
 
 //Cette constante définit un objet d'état initial avec des propriétés représentant divers détails de l'utilisateur.
@@ -13,7 +13,8 @@ const init = {
     emailVerified : false,
     phoneNumber: "",
     photoURL: "",
-    userDocument: {} as UserDocument
+    userDocument: {} as UserDocument,
+    
 }
 
 const authUserContext = createContext({
@@ -41,6 +42,7 @@ value={
         phoneNumber:string;
         photoURL:string;
         userDocument:UserDocument;
+        
     },
     authUserIsLoading:auth.authUserIsLoading ,
     reloadAuthUserData : auth.reloadAuthUserData,

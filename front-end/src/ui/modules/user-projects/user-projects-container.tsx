@@ -23,6 +23,7 @@ export const ProjectsPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string>("");
+  const [editingProject, setEditingProject] = useState<ProjectWithId | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -74,6 +75,11 @@ export const ProjectsPage = () => {
         const newProject = { ...projectData, id: projectId, photoURL: selectedImageUrl };
         setProjects(prevProjects => [...prevProjects, newProject]);
         setIsPopupVisible(false);
+        setProjectName("");
+      setStackProject("");
+      setImageFile(null);
+      setImagePreview(null);
+      setUploadProgress(0);
       } else {
         console.error("Error creating project");
       }
@@ -83,6 +89,51 @@ export const ProjectsPage = () => {
       setIsLoading(false);
     }
   };
+
+  const handleEditButtonClick = (project: ProjectWithId) => {
+    setEditingProject(project);
+    setProjectName(project.projectName);
+    setStackProject(project.stackProject);
+    setSelectedImageUrl(project.photoURL || "");
+     setSelectedImageUrl(project.photoURL || "");
+  setImagePreview(project.photoURL || null);
+    setIsPopupVisible(true);
+  };
+
+  const handleEditProject = async () => {
+    if (!editingProject || !authUser) {
+      console.error("No project selected for editing or user not authenticated");
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const updatedData: Project = {
+        projectName,
+        stackProject,
+        photoURL: selectedImageUrl
+
+      };
+      await updateUserProject(authUser.uid, editingProject.id, updatedData);
+      const updatedProjects = projects.map(project =>
+        project.id === editingProject.id ? { ...project, ...updatedData } : project
+      );
+      setProjects(updatedProjects);
+      setIsPopupVisible(false);
+    } catch (error) {
+      console.error("Error editing project:", error);
+    } finally {
+      setIsLoading(false);
+      // Clear editing state
+      setEditingProject(null);
+      setProjectName("");
+      setStackProject("");
+      setSelectedImageUrl("");
+      setImagePreview(null);
+
+      
+    }
+  };
+
 
   const handleDeleteProject = async (projectId: string) => {
     try {
@@ -97,6 +148,7 @@ export const ProjectsPage = () => {
   return (
     <div>
       <Typography variant="h1">Projets</Typography>
+      <Button variant="accent" action={() => setIsPopupVisible(true)}>Nouveau projet</Button>
       <ul>
         {projects.map((project) => (
           <li key={project.id}>
@@ -104,13 +156,13 @@ export const ProjectsPage = () => {
               <Typography theme="white" variant="h3">Nom du projet :{project.projectName}</Typography>
               <Typography theme="white" variant="body-base">Stack du projet: {project.stackProject}</Typography>
               {project.photoURL && <img src={project.photoURL} alt={project.projectName} />}
-              <Button>Edit</Button>
+              <Button action={() => handleEditButtonClick(project)}>Edit</Button>
               <Button action={() => handleDeleteProject(project.id)}>Delete</Button>
             </div>
           </li>
         ))}
       </ul>
-      <Button variant="accent" action={() => setIsPopupVisible(true)}>Nouveau projet</Button>
+     
       {isPopupVisible && (
         <div className="popup">
           <div className="popup-content">
@@ -140,9 +192,9 @@ export const ProjectsPage = () => {
               uploadProgress={uploadProgress}
               isLoading={isLoading}
             />
-            <Button action={handleAddProject} disabled={isLoading}>
-              {isLoading ? "Chargement..." : "Ajouter projet"}
-            </Button>
+            <Button action={editingProject ? handleEditProject : handleAddProject} disabled={isLoading}>
+  {isLoading ? "Chargement..." : editingProject ? "Modifier projet" : "Ajouter projet"}
+</Button>
           </div>
         </div>
       )}

@@ -41,5 +41,5 @@ export interface Project {
   }
   export interface ProjectWithId extends Project {
     id: string;
-    setProjects : any
+    
   }

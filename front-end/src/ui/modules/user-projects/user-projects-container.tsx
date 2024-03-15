@@ -187,7 +187,7 @@ export const ProjectsPage = () => {
                 Stack du projet: {project.stackProject}
               </Typography>
               {project.photoURLs.map((photoURL, index) => (
-                <img key={index} src={photoURL} alt={project.projectName} />
+                <img key={index} src={photoURL} alt={project.projectName} className="w-24 y-24"  />
               ))}
               <Button action={() => handleEditButtonClick(project)}>
                 Edit
@@ -201,36 +201,40 @@ export const ProjectsPage = () => {
       </ul>
 
       {isPopupVisible && (
-        <div className="popup">
-          <div className="popup-content">
-            <span className="close" onClick={() => setIsPopupVisible(false)}>
-              &times;
-            </span>
-            <Typography variant="h2" theme="white">
-              Nouveau projet
-            </Typography>
-            <div>
-              <label className="text-white">Nom du projet:</label>
-              <input
-                type="text"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label className="text-white">Stack du projet:</label>
-              <input
-                type="text"
-                value={stackProject}
-                onChange={(e) => setStackProject(e.target.value)}
-              />
-            </div>
+         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+         <div className="bg-gray-400 p-8 rounded-lg w-150 h-150 rounded">
+           <span className="absolute top-0 right-0 m-2 cursor-pointer" onClick={() => setIsPopupVisible(false)}>
+             &times;
+           </span>
+           <div className="flex justify-center items-center gap-5">
+             <div>
+               <Typography theme="black" variant="body-lg" className="text-black block mb-2">Nom du projet:</Typography>
+               <input
+                 type="text"
+                 value={projectName}
+                 onChange={(e) => setProjectName(e.target.value)}
+                 className="block w-full border-gray-300 px-4 py-2 rounded"
+               />
+             </div>
+             <div>
+               <Typography theme="black" variant="body-lg" className="text-black block mb-2">Stack du projet:</Typography>
+               <input
+                 type="text"
+                 value={stackProject}
+                 onChange={(e) => setStackProject(e.target.value)}
+                 className="block w-full border-gray-300 px-4 py-2 rounded"
+               />
+             </div>
+           </div>
+           <div className="flex justify-center items-center ">
             <UploadImages
               handleImageSelect={handleImageSelect}
               imagePreview={imagePreview}
               uploadProgress={uploadProgress}
               isLoading={isLoading}
-            />
+              />
+             
+              </div> 
             <Button
               action={editingProject ? handleEditProject : handleAddProject}
               disabled={isLoading}
@@ -241,6 +245,7 @@ export const ProjectsPage = () => {
                 ? "Modifier projet"
                 : "Ajouter projet"}
             </Button>
+            <Button action={() => setIsPopupVisible(false)} variant="danger">Annulé</Button>
           </div>
         </div>
       )}

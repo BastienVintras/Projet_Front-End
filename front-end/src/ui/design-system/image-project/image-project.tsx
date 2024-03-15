@@ -15,7 +15,7 @@ interface Props {
     switch (size) {
       
       case "small":
-        sizeStyles = "w-[100px] h-[100px]";
+        sizeStyles = "w-24 h-24";
         break;
   
       case "medium"://Default

@@ -31,12 +31,12 @@ export const UploadImages = ({
                 variant === "outline" && "bg-white hover:bg-secondary border border-gray-700 text-gray-800",
                 "inline-block rounded px-[18px] py-[15px] text-caption-2 font-medium animate"
             )}>
-                <div className="flex items-center gap-2">
-                    <ImageProject src="" alt="" />
-                    
-                    {imagePreview && <img src={typeof imagePreview === "string" ? imagePreview : String(imagePreview)} alt="Aperçu" />}
-
-
+               <div className="flex items-center gap-2">
+                    {imagePreview ? (
+                        <img src={typeof imagePreview === "string" ? imagePreview : String(imagePreview)} alt="Aperçu" className="w-24 h-24" />
+                    ) : (
+                        <ImageProject src="" alt="" size="small" />
+                    )}
                 </div>
 
                 <input

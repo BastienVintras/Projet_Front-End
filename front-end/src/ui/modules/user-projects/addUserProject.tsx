@@ -1,31 +1,41 @@
-import { addDoc, collection, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { Project } from '@/types/user';
-import { UserInterface } from '@/types/user';
-import { db, storage } from '@/config/firebase-config';
+import { db } from '@/config/firebase-config';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+export const addUserProject = async (userId: string, project: Project, imageFiles: FileList | null) => {
+  if (!imageFiles || imageFiles.length === 0) {
+    console.error("No image files selected");
+    return null;
+  }
 
-export const addUserProject = async (userId: string, project: Project, imageFile: File) => {
   try {
     const storage = getStorage();
-    
-    // Créer une référence à l'emplacement dans Firebase Storage où vous voulez stocker l'image
-    const imageRef = ref(storage, `users-media/${userId}/project_images/${Date.now()}_${imageFile.name}`);
+    const imageURLs: string[] = [];
 
-    // Télécharger l'image vers Firebase Storage
-    await uploadBytes(imageRef, imageFile);
-
-    // Obtenir l'URL de téléchargement de l'image
-    const imageURL = await getDownloadURL(imageRef);
+    // Boucle sur chaque fichier d'image dans la liste
+    for (let i = 0; i < imageFiles.length; i++) {
+      const imageFile = imageFiles[i];
+      
+      // Créer une référence à l'emplacement dans Firebase Storage où vous voulez stocker l'image
+      const imageRef = ref(storage, `users-media/${userId}/projects/${Date.now()}_${imageFile.name}`);
+      
+      // Télécharger l'image vers Firebase Storage
+      await uploadBytes(imageRef, imageFile);
+      
+      // Obtenir l'URL de téléchargement de l'image
+      const imageURL = await getDownloadURL(imageRef);
+      imageURLs.push(imageURL); // Ajoutez l'URL de l'image à la liste des URL d'images
+    }
 
     // Créer une référence au document de l'utilisateur dans la collection "users"
     const userDocRef = doc(db, 'users', userId);
     // Créer une sous-collection "projects" pour cet utilisateur
     const projectsCollectionRef = collection(userDocRef, 'projects');
-    // Ajouter le projet à la sous-collection "projects" avec l'URL de l'image
+    // Ajouter le projet à la sous-collection "projects" avec les URL des images
     const projectData = {
       ...project,
-      photoURL: imageURL // Assurez-vous que votre modèle de projet comporte un champ "photoURL"
+      photoURLs: imageURLs // Assurez-vous que votre modèle de projet comporte un champ "photoURLs"
     };
     const projectDocRef = await addDoc(projectsCollectionRef, projectData);
     
@@ -35,6 +45,7 @@ export const addUserProject = async (userId: string, project: Project, imageFile
     return null;
   }
 };
+
 
 export const updateUserProject = async (userId: string, projectId: string, projectData: Partial<Project>) => {
   const projectRef = doc(db, 'users', userId, 'projects', projectId);

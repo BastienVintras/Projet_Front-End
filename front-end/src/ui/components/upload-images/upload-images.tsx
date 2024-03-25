@@ -1,17 +1,19 @@
 import { useAuth } from "@/context/authUserContext";
 import { ImageProject } from "@/ui/design-system/image-project/image-project";
 import clsx from "clsx";
-
+import { HiOutlineTrash } from "react-icons/hi2";
 interface Props {
     handleImageSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleDeleteImage?: () => void; // Optionnel pour permettre l'utilisation du composant sans fonction de suppression
     imagePreview: string | ArrayBuffer | null;
     uploadProgress: number;
     isLoading: boolean;
     variant?: "primary" | "outline";
-}
+  }
 
 export const UploadImages = ({
     handleImageSelect,
+    handleDeleteImage,
     imagePreview,
     uploadProgress,
     isLoading,
@@ -32,12 +34,19 @@ export const UploadImages = ({
                 "inline-block rounded px-[18px] py-[15px] text-caption-2 font-medium animate"
             )}>
                <div className="flex items-center gap-2">
-                    {imagePreview ? (
-                        <img src={typeof imagePreview === "string" ? imagePreview : String(imagePreview)} alt="Aperçu" className="w-24 h-24" />
-                    ) : (
-                        <ImageProject src="" alt="" size="small" />
-                    )}
-                </div>
+  {imagePreview ? (
+    <>
+      <img src={typeof imagePreview === "string" ? imagePreview : String(imagePreview)} alt="Aperçu" className="w-24 h-24" />
+      {handleDeleteImage && (
+        <button onClick={handleDeleteImage} className="delete-icon" disabled={isLoading}>          
+          <HiOutlineTrash />
+        </button>
+      )}
+    </>
+  ) : (
+    <ImageProject src="" alt="" size="small" />
+  )}
+</div>
 
                 <input
                     type="file"
